@@ -51,32 +51,6 @@ import 'package:color_convert/src/color_convert_base_2.g.dart';
 
 // bool _isValidColorSpace(String name) => colorSpaceNames.contains(name);
 
-// class _ConversionResult extends Object with ListMixin<int> {
-//   final List<num> _list = [];
-//   _ConversionResult(List<num> l) {
-//     l.forEach((element) {
-//       _list.add(element);
-//     });
-//   }
-
-//   @override
-//   set length(int newLength) {
-//     _list.length = newLength;
-//   }
-
-//   @override
-//   int get length => _list.length;
-
-//   @override
-//   int operator [](int index) => _list[index].round();
-
-//   @override
-//   void operator []=(int index, num value) {
-//     _list[index] = value;
-//   }
-
-//   List<double> get raw => _list.map((e) => e.toDouble()).toList();
-// }
 
 // const _colorChannels = {
 //   'rgb': 3,
@@ -189,10 +163,3 @@ import 'package:color_convert/src/color_convert_base_2.g.dart';
 // }
 
 final convert = Convert();
-
-int d() {
-// convert.rgb.hsv([1,2,3]);
-
-return 1;
-}
-

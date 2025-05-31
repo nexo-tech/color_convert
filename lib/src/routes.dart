@@ -10,7 +10,7 @@ import 'gray.dart' as gray;
 import 'hcg.dart' as hcg;
 
 class A {
-  final y = (x) => hsv.rgb(rgb.hsl(x) as ListBase<num>);
+  final y = (x) => hsv.rgb(rgb.hsl(x));
 }
 
 const colorSpaceNames = [

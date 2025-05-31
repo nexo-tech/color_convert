@@ -140,13 +140,13 @@ String makeCallsFromPath(List<String> path) {
       p = "${e}(${p})";
     }
   }
-  return "(x) => ${p}";
+  return "((x) => ${p})";
 }
 
 Map<String, List<Map<String, String>>> buildMap() {
   Map<String, List<Map<String, String>>> result = {};
   Map<String, bool> allColorModels = getColorModels();
-  
+
   for (final key in allColorModels.keys) {
     result[key] = [];
     for (final targetModel in allColorModels.keys) {
@@ -155,10 +155,8 @@ Map<String, List<Map<String, String>>> buildMap() {
       }
       final path = findShortestPath(key, targetModel);
       if (path.isNotEmpty) {
-        result[key]!.add({
-          'to': targetModel,
-          'function': makeCallsFromPath(path)
-        });
+        result[key]!
+            .add({'to': targetModel, 'function': makeCallsFromPath(path)});
       }
     }
   }
@@ -166,9 +164,27 @@ Map<String, List<Map<String, String>>> buildMap() {
   return result;
 }
 
+class Dog {
+  final String raw = "123";
+
+  Dog();
+
+  void call(dynamic a1, [num? b1, num? c1, num? d1]) {
+    if (a1 is List) {
+      print('Called with list: $a1');
+    } else {
+      print('Called with args: $a1, $b1, $c1, $d1');
+    }
+  }
+}
+
 void main(List<String> args) {
+  var d = Dog();
+  d.raw;
+  d(1);
+
   final result = buildMap();
-  
+
   // where to put generated files
   final outputDir = args.isNotEmpty ? args[0] : 'lib/src';
   final outDir = Directory(outputDir);
@@ -185,11 +201,13 @@ void main(List<String> args) {
 
   // format data for template
   final data = {
-    'colors': result.entries.map((e) => {
-      'nameUpper': e.key.toUpperCase(),
-      'name': e.key,
-      'conversions': e.value
-    }).toList()
+    'colors': result.entries
+        .map((e) => {
+              'nameUpper': e.key.toUpperCase(),
+              'name': e.key,
+              'conversions': e.value
+            })
+        .toList()
   };
 
   final output = template.renderString(data);

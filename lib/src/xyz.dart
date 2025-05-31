@@ -2,7 +2,7 @@ import 'dart:collection';
 
 import 'dart:math';
 
-ListBase<num> rgb(ListBase<num> xyz) {
+List<num> rgb(List<num> xyz) {
   final x = xyz[0] / 100;
   final y = xyz[1] / 100;
   final z = xyz[2] / 100;
@@ -24,10 +24,10 @@ ListBase<num> rgb(ListBase<num> xyz) {
   b = min(max(0, b), 1);
 
   List<num> res = [r * 255 as num, g * 255 as num, b * 255 as num];
-  return res as ListBase<num>;
+  return res;
 }
 
-List<num> lab(ListBase<num> xyz) {
+List<num> lab(List<num> xyz) {
   var x = xyz[0];
   var y = xyz[1];
   var z = xyz[2];

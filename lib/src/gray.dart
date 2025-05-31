@@ -1,28 +1,26 @@
-import 'dart:collection';
-
-ListBase<num> rgb(ListBase<num> args) {
-  return [args[0] / 100 * 255, args[0] / 100 * 255, args[0] / 100 * 255] as ListBase<num>;
+List<num> rgb(List<num> args) {
+  return [args[0] / 100 * 255, args[0] / 100 * 255, args[0] / 100 * 255];
 }
 
-List<num> hsl(ListBase<num> args) {
+List<num> hsl(List<num> args) {
   return [0, 0, args[0]];
 }
 
 const hsv = hsl;
 
-List<num> hwb(ListBase<num> gray) {
+List<num> hwb(List<num> gray) {
   return [0, 100, gray[0]];
 }
 
-List<num> cmyk(ListBase<num> gray) {
+List<num> cmyk(List<num> gray) {
   return [0, 0, 0, gray[0]];
 }
 
-List<num> lab(ListBase<num> gray) {
+List<num> lab(List<num> gray) {
   return [gray[0], 0, 0];
 }
 
-String hex(ListBase<num> gray) {
+String hex(List<num> gray) {
   final val = (gray[0] / 100 * 255).round() & 0xFF;
   final integer = (val << 16) + (val << 8) + val;
 

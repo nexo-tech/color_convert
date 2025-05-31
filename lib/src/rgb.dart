@@ -1,10 +1,12 @@
 import 'dart:collection';
 import 'dart:math';
+import 'package:color_convert/src/args.dart';
+
 import 'color_name.dart';
 
 var reverseKeywords = cssKeywords.map((key, value) => MapEntry(value, key));
 
-int _comparativeDistance(ListBase<num> x, ListBase<num> y) {
+int _comparativeDistance(List<num> x, List<num> y) {
   /*
 		See https://en.m.wikipedia.org/wiki/Euclidean_distance#Squared_Euclidean_distance
 	*/
@@ -12,7 +14,8 @@ int _comparativeDistance(ListBase<num> x, ListBase<num> y) {
       .toInt();
 }
 
-List<num> hsl(ListBase<num> rgb) {
+List<num> hsl(dynamic a1, [num? b1, num? c1, num? d1]) {
+  final rgb = args(a1, b1, c1, d1);
   final r = rgb[0] / 255;
   final g = rgb[1] / 255;
   final b = rgb[2] / 255;
@@ -51,7 +54,7 @@ List<num> hsl(ListBase<num> rgb) {
   return [h, s * 100, l * 100];
 }
 
-List<num> hsv(ListBase<num> rgb) {
+List<num> hsv(List<num> rgb) {
   double rdif, gdif, bdif, h =0 , s;
 
   final r = rgb[0] / 255;
@@ -90,14 +93,14 @@ List<num> hsv(ListBase<num> rgb) {
   return [h * 360, s * 100, v * 100];
 }
 
-ListBase<num> hwb(ListBase<num> rgb) {
+List<num> hwb(List<num> rgb) {
   final r = rgb[0];
   final g = rgb[1];
   var b = rgb[2].toDouble();
   final h = hsl(rgb)[0];
   final w = 1 / 255 * min(r, min(g, b));
   b = 1 - 1 / 255 * max(r, max(g, b));
-  return [h, w * 100, b * 100] as ListBase<num>;
+  return [h, w * 100, b * 100];
 }
 
 List<num> cmyk(List<num> rgb) {
@@ -118,7 +121,7 @@ List<num> cmyk(List<num> rgb) {
   ];
 }
 
-String? keyword(ListBase<num> rgb) {
+String? keyword(List<num> rgb) {
   if (reverseKeywords.containsKey(rgb)) {
     return reverseKeywords[rgb];
   }
@@ -133,7 +136,7 @@ String? keyword(ListBase<num> rgb) {
     }
 
     // Compute comparative distance
-    final distance = _comparativeDistance(rgb, value as ListBase<num>);
+    final distance = _comparativeDistance(rgb, value);
 
     // Check if its less, if so set as closest
     if (distance < currentClosestDistance) {
@@ -188,7 +191,7 @@ int ansi16(List<num> rgb, {int? saturation}) {
   final g = rgb[1];
   final b = rgb[2];
 
-  var value = saturation ?? hsv(rgb as ListBase<num>)[2]; // Hsv -> ansi16 optimization
+  var value = saturation ?? hsv(rgb)[2]; // Hsv -> ansi16 optimization
 
   value = (value / 50).round();
 
