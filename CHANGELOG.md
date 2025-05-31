@@ -1,3 +1,8 @@
+## 2.0.0
+
+- Add null-safety support.
+- Added documentation.
+
 ## 1.0.2
 
 - Package related fixes

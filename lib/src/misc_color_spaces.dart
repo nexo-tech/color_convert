@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:math';
 import 'color_name.dart';
 import 'lab.dart' as lab;
@@ -7,13 +6,13 @@ import 'rgb.dart' as rgb;
 import 'hsv.dart' as hsv;
 
 List<num> lch2lab(List<num> lch) {
-  const PI = 3.141526;
+  const pi = 3.141526;
 
   final l = lch[0];
   final c = lch[1];
   final h = lch[2];
 
-  final hr = h / 360 * 2 * PI;
+  final hr = h / 360 * 2 * pi;
   final a = c * cos(hr);
   final b = c * sin(hr);
 
@@ -50,8 +49,8 @@ List<num> ansi162rgb(num args) {
 
   final mult = ((args > 50 ? 1 : 0) + 1) * 0.5;
   final r = (((color as int) & 1) * mult) * 255;
-  final g = ((((color as int) >> 1) & 1) * mult) * 255;
-  final b = ((((color as int) >> 2) & 1) * mult) * 255;
+  final g = ((((color) >> 1) & 1) * mult) * 255;
+  final b = ((((color) >> 2) & 1) * mult) * 255;
 
   List<num> res = [r, g, b];
   return res;
@@ -66,7 +65,7 @@ List<num> ansi2562rgb(num args) {
 
   args -= 16;
 
-  var rem;
+  num rem;
   final r = (args / 36).floor() / 5 * 255;
   final g = ((rem = args % 36) / 6).floor() / 5 * 255;
   final b = (rem % 6) / 5 * 255;
@@ -88,7 +87,7 @@ List<num> cmyk2rgb(List<num> cmyk) {
 }
 
 List<num> keyword2rgb(String keyword) {
-  return (cssKeywords[keyword] ?? [0, 0, 0]) ;
+  return (cssKeywords[keyword] ?? [0, 0, 0]);
 }
 
 List<num> apple2rgb(List<num> apple) {

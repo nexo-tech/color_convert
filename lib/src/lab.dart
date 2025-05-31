@@ -1,13 +1,12 @@
-import 'dart:collection';
 import 'dart:math';
 
 List<num> xyz(List<num> lab) {
   final l = lab[0];
   final a = lab[1];
   final b = lab[2];
-  var x;
-  var y;
-  var z;
+  num x;
+  num y;
+  num z;
 
   y = (l + 16) / 116;
   x = a / 500 + y;
@@ -29,15 +28,15 @@ List<num> xyz(List<num> lab) {
 }
 
 List<num> lch(List<num> lab) {
-  const PI = 3.141526;
+  const pi = 3.141526;
 
   final l = lab[0];
   final a = lab[1];
   final b = lab[2];
-  var h;
+  num h;
 
   final hr = atan2(b, a);
-  h = hr * 360 / 2 / PI;
+  h = hr * 360 / 2 / pi;
 
   if (h < 0) {
     h += 360;

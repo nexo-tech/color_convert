@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'misc_color_spaces.dart';
 import 'rgb.dart' as rgb;
 import 'hsl.dart' as hsl;
@@ -8,10 +7,6 @@ import 'xyz.dart' as xyz;
 import 'lab.dart' as lab;
 import 'gray.dart' as gray;
 import 'hcg.dart' as hcg;
-
-class A {
-  final y = (x) => hsv.rgb(rgb.hsl(x));
-}
 
 const colorSpaceNames = [
   'rgb',

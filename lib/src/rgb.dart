@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:math';
 import 'package:color_convert/src/args.dart';
 
@@ -23,7 +22,7 @@ List<num> hsl(dynamic a1, [num? b1, num? c1, num? d1]) {
   final min_ = min(min(r, g), b);
   final max_ = max(max(r, g), b);
   final delta = max_ - min_;
-  double h=0, s;
+  double h = 0, s;
 
   if (max_ == min_) {
     h = 0;
@@ -55,16 +54,16 @@ List<num> hsl(dynamic a1, [num? b1, num? c1, num? d1]) {
 }
 
 List<num> hsv(List<num> rgb) {
-  double rdif, gdif, bdif, h =0 , s;
+  double rdif, gdif, bdif, h = 0, s;
 
   final r = rgb[0] / 255;
   final g = rgb[1] / 255;
   final b = rgb[2] / 255;
   final v = max(max(r, g), b);
   final diff = v - min(min(r, g), b);
-  final diffc = (c) {
+  diffc(c) {
     return (v - c) / 6 / diff + 1 / 2;
-  };
+  }
 
   if (diff == 0) {
     h = 0;
