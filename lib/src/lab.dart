@@ -1,7 +1,7 @@
 import 'dart:collection';
 import 'dart:math';
 
-List<num> xyz(ListBase<num> lab) {
+ListBase<num> xyz(ListBase<num> lab) {
   final l = lab[0];
   final a = lab[1];
   final b = lab[2];
@@ -24,7 +24,8 @@ List<num> xyz(ListBase<num> lab) {
   y *= 100;
   z *= 108.883;
 
-  return [x, y, z];
+  List<num> res = [x, y, z];
+  return res as ListBase<num>;
 }
 
 List<num> lch(ListBase<num> lab) {

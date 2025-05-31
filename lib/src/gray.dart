@@ -1,7 +1,7 @@
 import 'dart:collection';
 
-List<num> rgb(ListBase<num> args) {
-  return [args[0] / 100 * 255, args[0] / 100 * 255, args[0] / 100 * 255];
+ListBase<num> rgb(ListBase<num> args) {
+  return [args[0] / 100 * 255, args[0] / 100 * 255, args[0] / 100 * 255] as ListBase<num>;
 }
 
 List<num> hsl(ListBase<num> args) {

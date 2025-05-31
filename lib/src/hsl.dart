@@ -1,7 +1,7 @@
 import 'dart:collection';
 import 'dart:math';
 
-List<num> rgb(ListBase<num> hsl) {
+ListBase<num> rgb(ListBase<num> hsl) {
   final h = hsl[0] / 360;
   final s = hsl[1] / 100;
   final l = hsl[2] / 100;
@@ -9,7 +9,7 @@ List<num> rgb(ListBase<num> hsl) {
 
   if (s == 0) {
     val = l * 255;
-    return [val, val, val];
+    return [val, val, val] as ListBase<num>;
   }
 
   if (l < 0.5) {
@@ -44,10 +44,10 @@ List<num> rgb(ListBase<num> hsl) {
     rgb[i] = val * 255;
   }
 
-  return rgb;
+  return rgb as ListBase<num>;
 }
 
-List<num> hsv(ListBase<num> hsl) {
+ListBase<num> hsv(ListBase<num> hsl) {
   final h = hsl[0];
   var s = hsl[1] / 100;
   var l = hsl[2] / 100;
@@ -60,10 +60,10 @@ List<num> hsv(ListBase<num> hsl) {
   final v = (l + s) / 2;
   final sv = l == 0 ? (2 * smin) / (lmin + smin) : (2 * s) / (l + s);
 
-  return [h, sv * 100, v * 100];
+  return [h, sv * 100, v * 100] as ListBase<num>;
 }
 
-List<num> hcg(ListBase<num> hsl) {
+ListBase<num> hcg(ListBase<num> hsl) {
   final s = hsl[1] / 100.0;
   final l = hsl[2] / 100.0;
 
@@ -74,5 +74,5 @@ List<num> hcg(ListBase<num> hsl) {
     f = (l - 0.5 * c) / (1.0 - c);
   }
 
-  return [hsl[0].toDouble(), c * 100, f * 100];
+  return [hsl[0].toDouble(), c * 100, f * 100] as ListBase<num>;
 }

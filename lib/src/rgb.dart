@@ -20,7 +20,7 @@ List<num> hsl(ListBase<num> rgb) {
   final min_ = min(min(r, g), b);
   final max_ = max(max(r, g), b);
   final delta = max_ - min_;
-  double h, s;
+  double h=0, s;
 
   if (max_ == min_) {
     h = 0;
@@ -52,7 +52,7 @@ List<num> hsl(ListBase<num> rgb) {
 }
 
 List<num> hsv(ListBase<num> rgb) {
-  double rdif, gdif, bdif, h, s;
+  double rdif, gdif, bdif, h =0 , s;
 
   final r = rgb[0] / 255;
   final g = rgb[1] / 255;
@@ -90,14 +90,14 @@ List<num> hsv(ListBase<num> rgb) {
   return [h * 360, s * 100, v * 100];
 }
 
-List<num> hwb(List<num> rgb) {
+ListBase<num> hwb(ListBase<num> rgb) {
   final r = rgb[0];
   final g = rgb[1];
   var b = rgb[2].toDouble();
   final h = hsl(rgb)[0];
   final w = 1 / 255 * min(r, min(g, b));
   b = 1 - 1 / 255 * max(r, max(g, b));
-  return [h, w * 100, b * 100];
+  return [h, w * 100, b * 100] as ListBase<num>;
 }
 
 List<num> cmyk(List<num> rgb) {
@@ -118,19 +118,22 @@ List<num> cmyk(List<num> rgb) {
   ];
 }
 
-String keyword(ListBase<num> rgb) {
-  if (reverseKeywords.containsValue(rgb)) {
+String? keyword(ListBase<num> rgb) {
+  if (reverseKeywords.containsKey(rgb)) {
     return reverseKeywords[rgb];
   }
 
   var currentClosestDistance = double.infinity;
-  String currentClosestKeyword;
+  String currentClosestKeyword = "";
 
   for (final keyword in cssKeywords.keys) {
     var value = cssKeywords[keyword];
+    if (value == null) {
+      continue;
+    }
 
     // Compute comparative distance
-    final distance = _comparativeDistance(rgb, value);
+    final distance = _comparativeDistance(rgb, value as ListBase<num>);
 
     // Check if its less, if so set as closest
     if (distance < currentClosestDistance) {
@@ -143,9 +146,9 @@ String keyword(ListBase<num> rgb) {
 }
 
 List<num> xyz(List<num> rgb) {
-  var r = rgb[0] / 255.0;
-  var g = rgb[1] / 255.0;
-  var b = rgb[2] / 255.0;
+  num r = rgb[0] / 255.0;
+  num g = rgb[1] / 255.0;
+  num b = rgb[2] / 255.0;
 
   // Assume sRGB
   r = r > 0.04045 ? pow((r + 0.055) / 1.055, 2.4) : (r / 12.92);
@@ -161,9 +164,9 @@ List<num> xyz(List<num> rgb) {
 
 List<num> lab(List<num> rgb) {
   final xyz_ = xyz(rgb);
-  var x = xyz_[0].toDouble();
-  var y = xyz_[1].toDouble();
-  var z = xyz_[2].toDouble();
+  num x = xyz_[0].toDouble();
+  num y = xyz_[1].toDouble();
+  num z = xyz_[2].toDouble();
 
   x /= 95.047;
   y /= 100;
@@ -180,12 +183,12 @@ List<num> lab(List<num> rgb) {
   return [l, a, b];
 }
 
-int ansi16(List<num> rgb, {int saturation}) {
+int ansi16(List<num> rgb, {int? saturation}) {
   final r = rgb[0];
   final g = rgb[1];
   final b = rgb[2];
 
-  var value = saturation ?? hsv(rgb)[2]; // Hsv -> ansi16 optimization
+  var value = saturation ?? hsv(rgb as ListBase<num>)[2]; // Hsv -> ansi16 optimization
 
   value = (value / 50).round();
 

@@ -1,12 +1,12 @@
 import 'dart:collection';
 
-List<num> rgb(ListBase<num> hcg) {
+ListBase<num> rgb(ListBase<num> hcg) {
   final h = hcg[0] / 360;
   final c = hcg[1] / 100;
   final g = hcg[2] / 100;
 
   if (c == 0.0) {
-    return [g * 255, g * 255, g * 255];
+    return [g * 255, g * 255, g * 255] as ListBase<num>;
   }
 
   final pure = [0.0, 0.0, 0.0];
@@ -53,7 +53,7 @@ List<num> rgb(ListBase<num> hcg) {
     (c * pure[0] + mg) * 255,
     (c * pure[1] + mg) * 255,
     (c * pure[2] + mg) * 255
-  ];
+  ] as ListBase<num>;
 }
 
 List<num> hsv(ListBase<num> hcg) {

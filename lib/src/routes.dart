@@ -1,6 +1,4 @@
 import 'dart:collection';
-
-import 'color_name.dart';
 import 'misc_color_spaces.dart';
 import 'rgb.dart' as rgb;
 import 'hsl.dart' as hsl;
@@ -10,6 +8,10 @@ import 'xyz.dart' as xyz;
 import 'lab.dart' as lab;
 import 'gray.dart' as gray;
 import 'hcg.dart' as hcg;
+
+class A {
+  final y = (x) => hsv.rgb(rgb.hsl(x) as ListBase<num>);
+}
 
 const colorSpaceNames = [
   'rgb',
@@ -43,7 +45,7 @@ Map<String, Map<String, dynamic>> conversionRoutes = {
     'keyword': rgb.keyword,
     'xyz': rgb.xyz,
     'lab': rgb.lab,
-    'lch': (x) => lab.lch(rgb.lab(x)),
+    'lch': rgb2lch,
     'ansi16': rgb.ansi16,
     'ansi256': rgb.ansi256,
     'hex': rgb.hex,
@@ -59,7 +61,7 @@ Map<String, Map<String, dynamic>> conversionRoutes = {
   'hsv': {
     'rgb': hsv.rgb,
     'hsl': hsv.hsl,
-    'ansi16': (x) => rgb.ansi16(hsv.rgb(x)),
+    'ansi16': hsv2ansi16,
     'hcg': hsv.hcg,
   },
   'hwb': {
@@ -75,7 +77,7 @@ Map<String, Map<String, dynamic>> conversionRoutes = {
   'xyz': {
     'rgb': xyz.rgb,
     'lab': xyz.lab,
-    'lch': (x) => lab.lch(xyz.lab(x)),
+    'lch': xyz2lch,
   },
   'lab': {
     'xyz': lab.xyz,
@@ -88,9 +90,7 @@ Map<String, Map<String, dynamic>> conversionRoutes = {
     'rgb': hex2rgb,
   },
   'keyword': {
-    'rgb': (String keyword) {
-      return cssKeywords[keyword];
-    },
+    'rgb': keyword2rgb,
   },
   'ansi16': {
     'rgb': ansi162rgb,
@@ -102,11 +102,7 @@ Map<String, Map<String, dynamic>> conversionRoutes = {
     'rgb': cmyk2rgb,
   },
   'apple': {
-    'rgb': (ListBase<num> apple) => [
-          (apple[0] / 65535) * 255,
-          (apple[1] / 65535) * 255,
-          (apple[2] / 65535) * 255
-        ],
+    'rgb': apple2rgb,
   },
   'gray': {
     'rgb': gray.rgb,

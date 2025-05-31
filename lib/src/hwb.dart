@@ -14,7 +14,7 @@ List<num> hcg(ListBase<num> hwb) {
   return [hwb[0].toDouble(), c * 100, g * 100];
 }
 
-List<num> rgb(ListBase<num> hwb) {
+ListBase<num> rgb(ListBase<num> hwb) {
   final h = hwb[0] / 360;
   var wh = hwb[1] / 100;
   var bl = hwb[2] / 100;
@@ -37,7 +37,7 @@ List<num> rgb(ListBase<num> hwb) {
 
   final n = wh + f * (v - wh); // Linear interpolation
 
-  double r, g, b;
+  double r = 0, g = 0, b = 0;
 
   if (i == 6 || i == 0) {
     r = v;
@@ -64,5 +64,6 @@ List<num> rgb(ListBase<num> hwb) {
     g = wh;
     b = n;
   }
-  return [r * 255, g * 255, b * 255];
+  List<num> res = [r * 255 as num, g * 255 as num, b * 255 as num];
+  return res as ListBase<num>;
 }

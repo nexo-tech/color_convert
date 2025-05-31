@@ -3,7 +3,7 @@ import 'dart:core';
 import 'dart:math';
 import 'package:color_convert/src/rgb.dart' as rgb_conv;
 
-List<num> rgb(ListBase<num> hsv) {
+ListBase<num> rgb(ListBase<num> hsv) {
   final h = hsv[0] / 60;
   final s = hsv[1] / 100;
   var v = hsv[2] / 100;
@@ -17,22 +17,22 @@ List<num> rgb(ListBase<num> hsv) {
 
   switch (hi) {
     case 0:
-      return [v, t, p];
+      return [v, t, p] as ListBase<num>;
     case 1:
-      return [q, v, p];
+      return [q, v, p] as ListBase<num>;
     case 2:
-      return [p, v, t];
+      return [p, v, t] as ListBase<num>;
     case 3:
-      return [p, q, v];
+      return [p, q, v] as ListBase<num>;
     case 4:
-      return [t, p, v];
+      return [t, p, v] as ListBase<num>;
     case 5:
-      return [v, p, q];
+      return [v, p, q] as ListBase<num>;
   }
-  return [v, t, p];
+  return [v, t, p] as ListBase<num>;
 }
 
-List<num> hsl(ListBase<num> hsv) {
+ListBase<num> hsl(ListBase<num> hsv) {
   final h = hsv[0];
   final s = hsv[1] / 100;
   final v = hsv[2] / 100;
@@ -46,7 +46,7 @@ List<num> hsl(ListBase<num> hsv) {
   sl = sl.isNaN ? 0 : sl;
   l /= 2;
 
-  return [h, sl * 100, l * 100];
+  return [h, sl * 100, l * 100] as ListBase<num>;
 }
 
 int ansi16(ListBase<num> hsv) =>
