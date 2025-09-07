@@ -1,12 +1,12 @@
 name: color_convert
 description: A color conversion library for Dart. It converts all ways between rgb, hsl, hsv, hwb, cmyk, ansi, ansi16, hex strings, and CSS keywords (will round to closest).
-version: 2.0.0
+version: 2.0.1
 repository: https://github.com/nexo-tech/color_convert
 homepage: https://github.com/nexo-tech/color_convert
 
 environment:
-  sdk: '>=2.17.0 <=3.8.0'
+  sdk: '>=2.17.0 <4.0.0'
 
 dev_dependencies:
-  lints: ^5.1.1
+  lints: ^6.0.0
   test: ^1.14.4

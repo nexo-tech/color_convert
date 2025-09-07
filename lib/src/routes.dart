@@ -8,6 +8,24 @@ import 'lab.dart' as lab;
 import 'gray.dart' as gray;
 import 'hcg.dart' as hcg;
 
+/// List of all supported color space names in the conversion system.
+///
+/// This list includes all color spaces that can be used with the convert API:
+/// * `rgb` - Red, Green, Blue
+/// * `hsl` - Hue, Saturation, Lightness
+/// * `hsv` - Hue, Saturation, Value
+/// * `hwb` - Hue, Whiteness, Blackness
+/// * `xyz` - CIE 1931 XYZ color space
+/// * `lab` - CIE L*a*b* color space
+/// * `lch` - Lightness, Chroma, Hue
+/// * `hex` - Hexadecimal color codes
+/// * `hcg` - Hue, Chroma, Grayness
+/// * `ansi16` - 16-color ANSI codes
+/// * `ansi256` - 256-color ANSI codes
+/// * `cmyk` - Cyan, Magenta, Yellow, Key/Black
+/// * `keyword` - CSS color keywords
+/// * `apple` - Apple RGB color space
+/// * `gray` - Grayscale
 const colorSpaceNames = [
   'rgb',
   'hsl',
@@ -31,6 +49,14 @@ const colorSpaceNames = [
 //       do not use box values types (i.e. Number(), String(), etc.)
 // const reverseKeywords = cssKeywords;
 
+/// Maps each color space to its available direct conversion functions.
+///
+/// This map defines the conversion routing system used by the convert API.
+/// Each key represents a source color space, and the value is a map of
+/// target color spaces to their conversion functions.
+///
+/// The system automatically finds the shortest conversion path between
+/// any two color spaces, even if no direct conversion exists.
 Map<String, Map<String, dynamic>> conversionRoutes = {
   'rgb': {
     'hsl': rgb.hsl,

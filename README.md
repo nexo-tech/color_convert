@@ -1,6 +1,8 @@
 # color_convert
 
-[![pub package](https://img.shields.io/badge/pub-2.0.0-blueviolet.svg)](https://pub.dev/packages/color_convert)
+[![pub package](https://img.shields.io/badge/pub-2.0.1-blueviolet.svg)](https://pub.dev/packages/color_convert)
+[![Dart SDK](https://img.shields.io/badge/Dart-2.17.0%2B-blue.svg)](https://dart.dev)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A color conversion library for Dart.
 It converts all ways between `rgb`, `hsl`, `hsv`, `hwb`, `cmyk`, `ansi`, `ansi16`, `hex` strings, and CSS `keyword`s (will round to closest).
